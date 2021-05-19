@@ -73,7 +73,9 @@
               <el-button type="text" size="small">转正</el-button>
               <el-button type="text" size="small">调岗</el-button>
               <el-button type="text" size="small">离职</el-button>
-              <el-button type="text" size="small">角色</el-button>
+              <el-button type="text" size="small" @click="editRole(row.id)"
+                >角色</el-button
+              >
               <el-button
                 type="text"
                 size="small"
@@ -107,6 +109,11 @@
           <canvas ref="myCanvas"></canvas>
         </el-row>
       </el-dialog>
+      <assign-role
+        ref="assignRole"
+        :showRoleDialog.sync="showRoleDialog"
+        :userId="userId"
+      ></assign-role>
     </div>
   </div>
 </template>
@@ -118,9 +125,11 @@ import AddEmploye from "./components/add-employee";
 // 在js中没办法用 | 处理时间，所以我们导入处理时间的方法
 import { formatDate } from "@/filters";
 import QrCode from "qrcode";
+import AssignRole from "./components/assign-role";
 export default {
   components: {
     AddEmploye,
+    AssignRole,
   },
   data() {
     return {
@@ -133,6 +142,8 @@ export default {
       },
       showDialog: false,
       showCodeDialog: false, //显示二维码弹层
+      showRoleDialog: false, //  控制弹窗的显示与隐藏
+      userId: null,
     };
   },
   created() {
@@ -252,6 +263,12 @@ export default {
       } else {
         this.$message.warning("该用户还未上传头像");
       }
+    },
+    async editRole(id) {
+      this.userId = id; // props赋值 props赋值渲染时异步的
+      // 调用子组件方法
+      await this.$refs.assignRole.getUserDetailById(id);
+      this.showRoleDialog = true;
     },
   },
 };
