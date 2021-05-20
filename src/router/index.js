@@ -75,7 +75,7 @@ export const constantRoutes = [
     }]
   },
   // 404 page must be placed at the end !!!
-  { path: "*", redirect: "/404", hidden: true }
+  // { path: "*", redirect: "/404", hidden: true }
 ];
 // 定义一个动态路由对象
 // 这里导出变量 做权限的时候会用到

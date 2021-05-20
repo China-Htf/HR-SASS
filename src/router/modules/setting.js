@@ -4,7 +4,7 @@ import Layout from '@/layout'
 // 每个子模块 其实 都是外层是layout  组件位于layout的二级路由里面
 export default {
   path: '/setting', // 路由地址 /employees
-  name: 'setting', // 给模块的一级路由增加 name 属性 这个属性 后期权限开发时会用到
+  name: 'settings', // 给模块的一级路由增加 name 属性 这个属性 后期权限开发时会用到
   component: Layout, // 组件
   // 配置二级路的路由表
   children: [{
